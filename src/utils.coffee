@@ -31,13 +31,14 @@ module.exports =
     template = dot.template template.toString()
     template opts
 
-  escape: (str) ->
-    str.replace /&/g, '&amp;'
-      .replace /</g, '&lt;'
-      .replace />/g, '&gt;'
-      .replace /"/g, '&quot;'
-      .replace /'/g, '&apos;'
-      .replace /@/g, '&#64;'
+  escapeEntities: (str) ->
+    if str
+      str.replace /&/g, '&amp;'
+        .replace /</g, '&lt;'
+        .replace />/g, '&gt;'
+        .replace /"/g, '&quot;'
+        .replace /'/g, '&apos;'
+        .replace /@/g, '&#64;'
 
   # NuGet allows pre-release version-numbers, but the pre-release name cannot
   # have a dot in it. See the docs:

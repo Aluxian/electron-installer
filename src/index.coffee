@@ -14,7 +14,7 @@ class InstallerFactory
     @appDirectory = opts.appDirectory
     @outputDirectory = path.resolve(opts.outputDirectory || 'installer')
     @loadingGif = if opts.loadingGif then path.resolve opts.loadingGif else path.resolve __dirname, '..', 'resources', 'install-spinner.gif'
-    @authors = opts.authors || appMetadata.author && utils.escape appMetadata.author || ''
+    @authors = opts.authors || appMetadata.author || ''
     @owners = opts.owners || @authors
     @copyright = opts.copyright || "Copyright © #{new Date().getFullYear()} #{@authors || @owners}"
     @name = appMetadata.name
@@ -33,6 +33,16 @@ class InstallerFactory
     @remoteReleases = opts.remoteReleases && opts.remoteReleases.replace('.git', '')
     @noMsi = opts.noMsi
     @arch = opts.arch || process.arch
+
+    @name = utils.escapeEntities @name
+    @title = utils.escapeEntities @title
+    @version = utils.escapeEntities @version
+    @authors = utils.escapeEntities @authors
+    @owners = utils.escapeEntities @owners
+    @iconUrl = utils.escapeEntities @iconUrl
+    @description = utils.escapeEntities @description
+    @copyright = utils.escapeEntities @copyright
+    @exe = utils.escapeEntities @exe
 
     unless @authors
       throw new Error 'Authors required: set "authors" in options or "author" in package.json'

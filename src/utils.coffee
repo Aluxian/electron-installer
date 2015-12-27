@@ -10,16 +10,6 @@ dot = require 'dot'
 module.exports =
 
   exec: (cmd, args, options) ->
-    # if process.platform isnt 'win32'
-    #   args.unshift cmd
-    #   cmd = 'wine'
-    #
-    #   args = args.map (arg) ->
-    #     if arg[0] is '/'
-    #       path.win32.normalize arg
-    #     else
-    #       arg
-
     new Promise (resolve, reject) ->
       cp.execFile cmd, args, options, (error, stdout, stderr) ->
         if error
@@ -48,3 +38,14 @@ module.exports =
       .replace /"/g, '&quot;'
       .replace /'/g, '&apos;'
       .replace /@/g, '&#64;'
+
+  # NuGet allows pre-release version-numbers, but the pre-release name cannot
+  # have a dot in it. See the docs:
+  # https://docs.nuget.org/create/versioning#user-content-prerelease-versions
+  convertVersion: (version) ->
+    parts = version.split('-')
+    mainVersion = parts.shift()
+    if parts.length > 0
+      [mainVersion, parts.join('-').replace(/\./g, '')].join('-')
+    else
+      mainVersion

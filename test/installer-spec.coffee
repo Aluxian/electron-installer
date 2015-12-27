@@ -23,6 +23,8 @@ describe 'create-windows-installer task', ->
           clearInterval interval
           assert.equal true, fs.existsSync('./test/fixtures/app/Update.exe')
           assert.equal true, fs.existsSync('./build/electron-1.0.0-full.nupkg')
+          if process.platform is 'win32'
+            assert.equal true, fs.existsSync('./build/ElectronSetup.msi')
           assert.equal true, fs.existsSync('./build/ElectronSetup.exe')
           resolve()
       , 15 * 1000

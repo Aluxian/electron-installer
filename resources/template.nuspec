@@ -9,6 +9,7 @@
     <iconUrl>{{= it.iconUrl }}</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>{{= it.description }}</description>
+    <copyright>{{= it.copyright }}</copyright>
   </metadata>
   <files>
     <file src="locales\**" target="lib\net45\locales" />

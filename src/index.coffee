@@ -16,19 +16,22 @@ class InstallerFactory
     @loadingGif = if opts.loadingGif then path.resolve opts.loadingGif else path.resolve __dirname, '..', 'resources', 'install-spinner.gif'
     @authors = opts.authors || appMetadata.author && utils.escape appMetadata.author || ''
     @owners = opts.owners || @authors
+    @copyright = opts.copyright || "Copyright © #{new Date().getFullYear()} #{@authors || @owners}"
     @name = appMetadata.name
     @productName = appMetadata.productName || @name
     @exe = opts.exe || @productName + '.exe'
     @setupExe = opts.setupExe || @productName + 'Setup.exe'
+    @setupMsi = opts.setupMsi || @productName + 'Setup.msi'
     @iconUrl = opts.iconUrl || ''
     @description = opts.description || appMetadata.description || ''
-    @version = opts.version || appMetadata.version || ''
+    @version = utils.convertVersion(opts.version || appMetadata.version || '')
     @title = opts.title || @productName || @name
     @certificateFile = opts.certificateFile
     @certificatePassword = opts.certificatePassword
     @signWithParams = opts.signWithParams
     @setupIcon = opts.setupIcon
     @remoteReleases = opts.remoteReleases && opts.remoteReleases.replace('.git', '')
+    @noMsi = opts.noMsi
 
     unless @authors
       throw new Error 'Authors required: set "authors" in options or "author" in package.json'
@@ -60,6 +63,9 @@ class InstallerFactory
       args.push '--signWithParams'
       args.push "/a\ /f\ #{@certificateFile}\ /p\ #{@certificatePassword}"
 
+    if @noMsi
+      args.push '--no-msi'
+
     if @setupIcon
       args.push '--setupIcon'
       args.push path.resolve @setupIcon
@@ -69,7 +75,11 @@ class InstallerFactory
   renameSetupFile: () =>
     oldSetupPath = path.join @outputDirectory, 'Setup.exe'
     newSetupPath = path.join @outputDirectory, @setupExe
+    oldSetupMsiPath = path.join @outputDirectory, 'Setup.msi'
+    newSetupMsiPath = path.join @outputDirectory, @setupMsi
     fs.renameSync oldSetupPath, newSetupPath
+    if fs.existsSync oldSetupMsiPath
+      fs.renameSync oldSetupMsiPath, newSetupMsiPath
     Promise.resolve()
 
   createInstaller: () ->

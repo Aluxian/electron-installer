@@ -12,14 +12,7 @@ Build Windows installers for [Electron](https://github.com/atom/electron) apps u
 npm install --save-dev electron-windows-installer
 ```
 
-<!-- If you're not on Windows, you'll need `wine`, `winetricks` and `.NET 4`. Quick install on OS X:
-
-```sh
-brew install wine winetricks
-winetricks dotnet40
-```
-
-**Note:** I can't get Squirrel to work with `wine`. I created an [issue on the Squirrel.Windows repo](https://github.com/Squirrel/Squirrel.Windows/issues/378). -->
+> Unlike the grunt plugin, this one doesn't support building on non-Windows (with mono and wine).
 
 ## Usage
 
@@ -32,7 +25,8 @@ var winInstaller = require('electron-windows-installer');
 gulp.task('create-windows-installer', function(done) {
   winInstaller({
     appDirectory: './build/win32',
-    outputDirectory: './release'
+    outputDirectory: './release',
+    arch: 'ia32'
   }).then(done).catch(done);
 });
 ```
@@ -44,6 +38,7 @@ There are several configuration settings supported:
 
 | Config Name           | Required | Description |
 | --------------------- | -------- | ----------- |
+| `arch`                | No       | The arch to build for. Defaults to the current platform's arch. |
 | `appDirectory`        | Yes      | The folder path of your Electron app |
 | `outputDirectory`     | No       | The folder path to create the `.exe` installer in. Defaults to the `installer` folder at the project root. |
 | `loadingGif`          | No       | The local path to a `.gif` file to display during install. |
@@ -51,14 +46,16 @@ There are several configuration settings supported:
 | `owners`              | No       | The owners value for the nuget package metadata. Defaults to the `authors` field when unspecified. |
 | `exe`                 | No       | The name of your app's main `.exe` file. This uses the `name` field in your app's package.json file with an added `.exe` extension when unspecified. |
 | `setupExe`            | No       | The name of the final setup .exe file. By default it's `<ProductName>Setup.exe`. |
+| `setupMsi`            | No       | The name of the final setup .msi file. By default it's `<ProductName>Setup.msi`. |
 | `description`         | No       | The description value for the nuget package metadata. Defaults to the `description` field from your app's package.json file when unspecified. |
-| `iconUrl`             | No       | An URL to a .ico/.png icon for the nuget package metadata. |
+| `iconUrl`             | No       | A URL to an ICO file to use as the application icon (displayed in Control Panel > Programs and Features). Defaults to the Atom icon. |
 | `version`             | No       | The version value for the nuget package metadata. Defaults to the `version` field from your app's package.json file when unspecified. |
 | `title`               | No       | The title value for the nuget package metadata. Defaults to the `productName` field and then the `name` field from your app's package.json file when unspecified. |
 | `certificateFile`     | No       | The path to an Authenticode Code Signing Certificate |
 | `certificatePassword` | No       | The password to decrypt the certificate given in `certificateFile` |
 | `signWithParams`      | No       | Params to pass to signtool.  Overrides `certificateFile` and `certificatePassword`. |
 | `setupIcon`           | No       | The ICO file to use as the icon for the generated Setup.exe |
+| `noMsi`               | No       | Should Squirrel.Windows create an MSI installer?
 | `remoteReleases`      | No       | A URL to your existing updates. If given, these will be downloaded to create delta updates |
 
 ## Sign your installer or else bad things will happen

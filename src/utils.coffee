@@ -39,6 +39,7 @@ module.exports =
         .replace /"/g, '&quot;'
         .replace /'/g, '&apos;'
         .replace /@/g, '&#64;'
+        .replace /©/g, '&copy;'
 
   # NuGet allows pre-release version-numbers, but the pre-release name cannot
   # have a dot in it. See the docs:

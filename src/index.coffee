@@ -32,6 +32,7 @@ class InstallerFactory
     @setupIcon = opts.setupIcon
     @remoteReleases = opts.remoteReleases && opts.remoteReleases.replace('.git', '')
     @noMsi = opts.noMsi
+    @arch = opts.arch || process.arch
 
     unless @authors
       throw new Error 'Authors required: set "authors" in options or "author" in package.json'

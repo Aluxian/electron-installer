@@ -47,7 +47,7 @@ module.exports = {
   },
   escapeEntities: function(str) {
     if (str) {
-      return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;').replace(/@/g, '&#64;').replace(/©/g, '&copy;');
+      return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;').replace(/@/g, '&#64;').replace(/©/g, '&#169;');
     }
   },
   convertVersion: function(version) {

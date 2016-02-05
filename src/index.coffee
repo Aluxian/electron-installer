@@ -69,7 +69,7 @@ class InstallerFactory
 
     if @signWithParams
       args.push '--signWithParams'
-      args.push '\"' + @signWithParams + '\"'
+      args.push @signWithParams
     else if @certificateFile and @certificatePassword
       args.push '--signWithParams'
       args.push "/a\ /f\ #{@certificateFile}\ /p\ #{@certificatePassword}"

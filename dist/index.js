@@ -76,7 +76,7 @@ InstallerFactory = (function() {
     args = ['--releasify', nupkgPath, '--releaseDir', this.outputDirectory, '--loadingGif', this.loadingGif];
     if (this.signWithParams) {
       args.push('--signWithParams');
-      args.push('\"' + this.signWithParams + '\"');
+      args.push(this.signWithParams);
     } else if (this.certificateFile && this.certificatePassword) {
       args.push('--signWithParams');
       args.push("/a\ /f\ " + this.certificateFile + "\ /p\ " + this.certificatePassword);

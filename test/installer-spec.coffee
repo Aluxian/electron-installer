@@ -27,6 +27,6 @@ describe 'create-windows-installer task', ->
             assert.equal true, fs.existsSync('./build/ElectronSetup.msi')
           assert.equal true, fs.existsSync('./build/ElectronSetup.exe')
           resolve()
-      , 15 * 1000
-    .then done
+      , 5 * 1000
+    .then () -> done()
     .catch done

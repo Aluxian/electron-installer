@@ -1,4 +1,5 @@
-spec
+test
+src
 *.coffee
 appveyor.yml
 .npmignore

@@ -64,7 +64,7 @@ For development / internal use, creating installers without a signature is okay,
 
 Any certificate valid for "Authenticode Code Signing" will work here, but if you get the right kind of code certificate, you can also opt-in to [Windows Error Reporting](http://en.wikipedia.org/wiki/Windows_Error_Reporting). [This MSDN page](http://msdn.microsoft.com/en-us/library/windows/hardware/hh801887.aspx) has the latest links on where to get a WER-compatible certificate. The "Standard Code Signing" certificate is sufficient for this purpose.
 
-## Handling Squirrel Events (for [Squirrel Aware](https://github.com/Squirrel/Squirrel.Windows/blob/master/docs/squirrel-events.md) apps)
+## Handling Squirrel Events (for [Squirrel Aware](https://github.com/Squirrel/Squirrel.Windows/blob/master/docs/using/custom-squirrel-events-non-cs.md) apps)
 
 Squirrel will spawn your app with command line flags on first run, updates, and uninstalls.
 It is **very** important that your app handle these events as _early_ as possible, and quit **immediately** after handling them.

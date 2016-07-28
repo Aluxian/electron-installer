@@ -4,6 +4,8 @@
 
 Build Windows installers for [Electron](https://github.com/atom/electron) apps using [Squirrel.Windows](https://github.com/Squirrel/Squirrel.Windows).
 
+> NOTE! This only works on Windows. If the stars align you might be able to run it with Wine, but ask Google first.
+
 ## Installation
 
 [![NPM](https://nodei.co/npm/electron-windows-installer.png)](https://nodei.co/npm/electron-windows-installer/)

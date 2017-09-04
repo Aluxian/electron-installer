@@ -3,7 +3,7 @@ init:
 
 environment:
   matrix:
-    - nodejs_version: 0.12
+    - nodejs_version: 8
 
 cache:
   - "node_modules -> package.json"

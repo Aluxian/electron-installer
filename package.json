@@ -1,6 +1,6 @@
 {
   "name": "electron-windows-installer",
-  "version": "1.4.4",
+  "version": "1.7.8",
   "description": "Build Windows installers for Electron apps using Squirrel. Works with Gulp!",
   "main": "./dist/index.js",
   "license": "MIT",
